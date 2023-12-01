@@ -922,12 +922,20 @@ void *dllRemoveFirst(DLList *l){
 }
 
 
+
 void *csllRemoveFirst(CSLList *l){
     if(l != NULL){
         if(l->first != NULL){
             CSLNode *first = l->first;
             void *data = first->data;
+            //verifico se tem mais de um elemento
             if(first->next != first){
+                //tenho que achar o último
+                CSLNode *last = l->first;
+                while(last -> next != l->first){
+                    last = last -> next;
+                }
+                last -> next = first->next;
                 l->first = first->next;
             }
             else{
@@ -947,6 +955,7 @@ void *cdllRemoveFirst(CDLList *l){
         if(l -> first != NULL){
             CDLNode *first = l->first;
             void *data = first->data;
+            //verifico se tem somente um elemento
             if(first -> next != first){
                 l->first = first -> next;
                 first -> next -> prev = first -> prev;
@@ -1067,5 +1076,132 @@ void *cdllRemoveLast(CDLList *l){
     }
 
     return NULL;
+}
+
+void *sllRemoveKPosition(SLList *l, int k){
+    if(l != NULL){
+        if(l->first != NULL){
+            SLNode *cur = l->first;
+            SLNode *prev = NULL;
+            int i = 0;
+            while(i< k && cur -> next != NULL){
+                prev = cur;
+                cur = cur->next;
+                i++;
+            }
+
+            if(cur != NULL){
+                void *data = cur -> data;
+                if(prev != NULL){
+                    prev->next = cur->next;
+                }
+                else{
+                    l->first = cur -> next;
+                }
+
+                free(cur);
+                return data;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *dllRemoveKPosition(DLList *l, int k){
+    if(l != NULL){
+        if(l -> first != NULL){
+            DLNode *cur = l->first;
+            int i = 0;
+            while(i < k && cur -> next != NULL){
+                cur = cur -> next;
+                i++;
+            }
+
+            if(cur != NULL){
+                void *data = cur -> data;
+                if(cur -> prev != NULL){
+                    cur -> prev -> next = cur -> next;
+                    cur -> next -> prev = cur -> prev;
+                }
+                else{
+                    l->first = cur -> next;
+                    cur -> next -> prev = NULL;
+                }
+
+                free(cur);
+                return data;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *csllRemoveKPosition(CSLList *l, int k){
+    if(l != NULL){
+        if(l->first != NULL){
+            CSLNode *cur = l->first;
+            CSLNode *prev = NULL;
+            int i = 0;
+            while(i<k && cur -> next != NULL){
+                prev = cur;
+                cur = cur -> next;
+                i++;
+            }
+
+            if(cur != NULL){
+                void *data = cur -> data;
+                if(prev != NULL){
+                    prev -> next = cur -> next;
+                }
+                else{
+                    //tenho que saber quem é o último
+                    CSLNode *last = l->first;
+                    while(last -> next != l->first){
+                        last = last -> next;
+                    }
+                    last -> next = cur -> next;
+                    l->first = cur -> next;
+                }
+
+                free(cur);
+                return data;
+            }
+        }
+    }
+}
+
+
+void *cdllRemoveKPosition(CDLList *l, int k){
+    if(l != NULL){
+        if(l -> first != NULL){
+            CDLNode *cur = l -> first;
+            int i = 0;
+            while(i<k && cur -> next != l->first){
+                cur = cur -> next;
+                i++;
+            }
+
+            if(cur != NULL){
+                void *data = cur -> data;
+                if(cur -> next != cur){
+                    cur->prev->next = cur -> next;
+                    cur -> next -> prev = cur -> prev;
+                    if(l->first == cur){
+                        l->first = cur -> next;
+                    }
+
+                }
+                else{
+                    l->first = NULL;
+                    
+                }
+
+                free(cur);
+                return data;
+            }
+        }
+    }
 }
 

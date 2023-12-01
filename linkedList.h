@@ -108,6 +108,17 @@ void *csllRemoveLast(CSLList *l);
 void *cdllRemoveLast(CDLList *l);
 
 
+void *sllRemoveKPosition(SLList *l, int k);
+void *dllRemoveKPosition(DLList *l, int k);
+void *csllRemoveKPosition(CSLList *l, int k);
+void *cdllRemoveKPosition(CDLList *l, int k);
+
+
+void *sllRemoveByKey(SLList *l, void *key);
+void *dllRemoveByKey(DLList *l, void *key);
+void *csllRemoveByKey(CSLList *l, void *key);
+void *cdllRemoveByKey(CDLList *l, void *key);
+
 
 
 
