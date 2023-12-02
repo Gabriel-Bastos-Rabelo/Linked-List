@@ -1205,3 +1205,189 @@ void *cdllRemoveKPosition(CDLList *l, int k){
     }
 }
 
+void *sllRemoveByKey(SLList *l, void *key, int(*cmp)(void*, void*)){
+    if(l != NULL){
+        if(l->first != NULL){
+            SLNode *current = l->first;
+            SLNode *prev = NULL;
+            int stat = cmp(current->data, key);
+            while(stat != TRUE && current -> next != NULL){
+                prev = current;
+                current = current -> next;
+                stat = cmp(current->data, key);
+            }
+
+            if(stat){
+                void *data = current->data;
+                if(prev != NULL){
+                    prev -> next = current -> next;
+                }
+                else{
+                    l->first = current -> next;
+                }
+
+                return data;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllRemoveByKey(DLList *l, void *key, int(*cmp)(void*, void*)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            DLNode *cur = l->first;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != NULL){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                void *data = cur -> data;
+                DLNode *prevcur = cur->prev;
+                DLNode *nextcur = cur -> next;
+                if(nextcur != NULL){
+                    nextcur->prev = prevcur;
+                }
+
+                if(prevcur != NULL){
+                    prevcur -> next = nextcur;
+                }
+
+                if(prevcur == NULL){
+                    l->first = nextcur;
+                }
+
+                free(cur);
+                return data;
+
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+void *csllRemoveByKey(CSLList *l, void *key, int(*cmp)(void*, void*)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            CSLNode *cur = l->first;
+            CSLNode *prev = NULL;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != l->first){
+                cur = cur -> next;
+                stat = cmp(cur->data, key);
+            }
+
+            if(stat){
+                void *data = cur -> data;
+                if(prev != NULL){
+                    prev->next = cur->next;
+                }
+                else{
+                    l->first = cur->next;
+                }
+
+                free(cur);
+                return data;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllRemoveByKey(CDLList *l, void *key, int(*cmp)(void*, void*)){
+    if(l != NULL){
+        if(l->first != NULL){
+            CDLNode *cur = l->first;
+            int stat = cmp(cur->data, key);
+            while(stat != TRUE && cur -> next != l->first){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                void *data = cur->data;
+                CDLNode *prevcur = cur -> prev;
+                CDLNode *nextcur = cur -> next;
+                nextcur->prev = prevcur;
+                prevcur->next = nextcur;
+
+                if(l->first == cur){
+                    if(nextcur == cur){
+                        l->first = NULL;
+                    }
+                    else{
+                        l->first = nextcur;
+                    }
+                }
+
+                free(cur);
+                return data;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *sllRemoveAfterKey(SLList *l, void *key, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            SLNode *cur = l->first;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != NULL){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                void *data = cur -> next -> data;
+                SLNode *nextcur = cur -> next;
+
+                if(nextcur != NULL){
+                    cur -> next = nextcur->next;
+
+                    free(nextcur);
+                    return data;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllRemoveAfterKey(DLList *l, void *key, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            DLNode *cur = l->first;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != NULL){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                void *data = cur -> next -> data;
+                DLNode *nextcur = cur -> next;
+
+                if(nextcur != NULL){
+                    cur -> next = nextcur -> next;
+                    if(nextcur -> next != NULL){
+                        nextcur -> next -> prev = cur;
+
+                    }
+                    free(nextcur);
+                    return data;
+                }
+            }
+        }
+    }
+}
