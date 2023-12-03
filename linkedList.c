@@ -1375,10 +1375,11 @@ void *dllRemoveAfterKey(DLList *l, void *key, int(*cmp)(void *, void *)){
             }
 
             if(stat){
-                void *data = cur -> next -> data;
+                
                 DLNode *nextcur = cur -> next;
 
                 if(nextcur != NULL){
+                    void *data = cur -> next -> data;
                     cur -> next = nextcur -> next;
                     if(nextcur -> next != NULL){
                         nextcur -> next -> prev = cur;
@@ -1391,3 +1392,201 @@ void *dllRemoveAfterKey(DLList *l, void *key, int(*cmp)(void *, void *)){
         }
     }
 }
+
+void *csllRemoveAfterKey(CSLList *l, void *key, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            CSLNode *cur = l->first;
+            int stat = cmp(cur->data, key);
+            while(stat != TRUE && cur -> next != l->first){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                CSLNode *nextcur = cur -> next;
+                if(nextcur != l->first){
+                    void *data = nextcur->data;
+                    cur -> next = nextcur -> next;
+
+                    free(nextcur);
+                    return data;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllRemoveAfterKey(CDLList *l, void *key, int(*cmp)(void *, void *)){
+
+    if(l != NULL){
+        if(l->first != NULL){
+            CDLNode *cur = l->first;
+            int stat = cmp(cur->data, key);
+            while(stat != TRUE && cur -> next != l->first){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                CDLNode *nextcur = cur -> next;
+                if(nextcur != l->first){
+                    void *data = nextcur -> data;
+                    cur -> next = nextcur -> next;
+                    if(nextcur->next != NULL){
+                        nextcur->next->prev = cur;
+                    }
+
+                    free(nextcur);
+                    return data;
+                }
+            }
+        }
+    }
+}
+
+
+void *sllRemoveBeforeKey(SLList *l, void *key, int(*cmp)(void*, void *)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            SLNode *cur = l->first;
+            SLNode *prev = NULL;
+            SLNode *prev2 = NULL;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != NULL){
+                prev2 = prev;
+                prev = cur;
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                if(prev != NULL){
+                    void *data = prev->data;
+                    if(prev2 != NULL){
+                        prev2 -> next = cur;
+                    }
+                    else{
+                        l->first = cur;
+                    }
+
+                    free(prev);
+                    return data;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllRemoveBeforeKey(DLList *l, void *key, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            DLNode *cur = l->first;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != NULL){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                DLNode *prev = cur -> prev;
+                if(prev != NULL){
+                    void *data = prev -> data;
+                    if(prev -> prev != NULL){
+                        prev->prev->next = cur;
+                    }
+                    else{
+                        l->first = cur;
+                    }
+
+                    cur -> prev = prev->prev;
+
+                    free(prev);
+                    return data;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+void *csllRemoveBeforeKey(CSLList *l, void *key, int(*cmp)(void*, void*)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            CSLNode *cur = l->first;
+            CSLNode *prev = NULL;
+            CSLNode *prev2 = NULL;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != l->first){
+                prev2 = prev;
+                prev = cur;
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                if(prev != NULL){
+                    void *data = prev -> data;
+                    if(prev2 != NULL){
+                        prev2 -> next = cur;
+                    }
+                    else{
+                        l->first = cur;
+                        //tenho que fazer o ultimo apontar para o novo primeiro
+                        CSLNode *aux = l->first;
+                        while(aux->next != l->first){
+                            aux = aux -> next;
+                        }
+                        aux -> next = cur;
+                    }
+
+                    free(prev);
+                    return data;
+
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllRemoveBeforeKey(CDLList *l, void *key, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            CDLNode *cur = l->first;
+            int stat = cmp(cur -> data, key);
+            while(stat != TRUE && cur -> next != l->first){
+                cur = cur -> next;
+                stat = cmp(cur -> data, key);
+            }
+
+            if(stat){
+                CDLNode *prev = cur -> prev;
+                if(prev != NULL){
+                    void *data = prev -> data;
+                    prev -> prev -> next = cur;
+                    cur -> prev = prev->prev;
+                    if(prev == l->first){
+                        l->first = cur;
+                    }
+
+                    free(prev);
+                    return data;
+                    
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+

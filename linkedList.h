@@ -126,6 +126,10 @@ void *csllRemoveAfterKey(CSLList *l, void *key, int(*cmp)(void *, void *));
 void *cdllRemoveAfterKey(CDLList *l, void *key, int(*cmp)(void *, void *));
 
 
+void *sllRemoveBeforeKey(SLList *l, void *key, int(*cmp)(void*, void *));
+void *dllRemoveBeforeKey(DLList *l, void *key, int(*cmp)(void *, void *));
+void *csllRemoveBeforeKey(CSLList *l, void *key, int(*cmp)(void*, void*));
+void *cdllRemoveBeforeKey(CDLList *l, void *key, int(*cmp)(void *, void *));
 
 
 
