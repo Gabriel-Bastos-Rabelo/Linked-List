@@ -132,7 +132,22 @@ void *csllRemoveBeforeKey(CSLList *l, void *key, int(*cmp)(void*, void*));
 void *cdllRemoveBeforeKey(CDLList *l, void *key, int(*cmp)(void *, void *));
 
 
+void *sllConcatenateLists(SLList *l, SLList *k);
+void *dllConcatenateLists(DLList *l, DLList *k);
+void *csllConcatenateLists(CSLList *l, CSLList *k);
+void *cdllConcatenateLists(CDLList *l, CDLList *k);
 
+
+int sllFreeNodes(SLList *l);
+int dllFreeNodes(DLList *l);
+int csllFreeNodes(CSLList *l);
+int cdllFreeNodes(CDLList *l);
+
+
+void *sllInvertList(SLList *l);
+void *dllInvertList(DLList *l);
+void *csllInvertList(CSLList *l);
+void *cdllInvertList(CDLList *l);
 
 
 
