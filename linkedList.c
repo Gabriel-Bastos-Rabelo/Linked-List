@@ -2422,3 +2422,623 @@ void *cdllJoinLists(CDLList *l, CDLList *k){
         }
     }
 }
+
+void *sllIntersectionLists(SLList *l, SLList *k, int(*cmp)(void *, void*)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            SLNode *curL = l->first;
+            SLNode *curK;
+            SLList *newlist = sllcreate();
+            while(curL != NULL){
+                curK = k->first;
+                while(curK != NULL){
+                    if(cmp(curL->data, curK->data)){
+                        if(newlist -> first != NULL){
+                            SLNode *newlistCur = newlist -> first;
+                            int alreadyExists = FALSE;
+                            while(newlistCur != NULL){
+                                if(cmp(newlistCur->data, curL->data)){
+                                    alreadyExists = TRUE;
+                                    break;
+                                }
+
+                                newlistCur = newlistCur -> next;
+                            }
+
+                            if(alreadyExists == FALSE){
+                                sllInsertAsLast(newlist, curL->data);
+                            }
+                        }
+                    }
+
+                    else{
+                        sllInsertAsLast(newlist, curL->data);
+                    }
+
+                    curK = curK->next;
+                }
+
+                curL = curL->next;                
+
+            }
+
+            return newlist;
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllIntersectionLists(DLList *l, DLList *k, int(*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            DLNode *curL = l->first;
+            DLNode *curK;
+            DLList *newlist = dllcreate();
+            while(curL != NULL){
+                curK = k->first;
+                while(curK != NULL){
+                    if(cmp(curL->data, curK->data)){
+                        if(newlist -> first != NULL){
+                            DLNode *newlistCur = newlist -> first;
+                            int alreadyExists = FALSE;
+                            while(newlistCur != NULL){
+                                if(cmp(newlistCur->data, curL->data)){
+                                    alreadyExists = TRUE;
+                                    break;
+                                }
+
+                                newlistCur = newlistCur -> next;
+                            }
+
+                            if(alreadyExists == FALSE){
+                                dllInsertAsLast(newlist, curL->data);
+                            }
+                        }
+                    }
+
+                    else{
+                        dllInsertAsLast(newlist, curL->data);
+                    }
+
+                    curK = curK->next;
+                }
+
+                curL = curL->next;                
+
+            }
+
+            return newlist;
+        }
+    }
+
+    return NULL;
+}
+
+void *csllIntersectionLists(CSLList *l, CSLList *k, int(*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CSLNode *curL = l->first;
+            CSLNode *curK;
+            CSLList *newlist = csllcreate();
+            if(newlist != NULL){
+                do{
+
+                    curK = k->first;
+
+                    do{
+
+                        if(cmp(curL->data, curK->data)){
+
+                            CSLNode *newlistCur = newlist->first;
+                            int alreadyExists = FALSE;
+                            if(newlistCur != NULL){
+                                do{ 
+                                    if(cmp(curL->data, newlistCur -> data)){
+                                        alreadyExists = TRUE;
+                                        break;
+                                    }
+
+                                    newlistCur = newlistCur -> next;
+                                    
+                                }while(newlistCur = newlist -> first);
+
+                            }
+
+                            if(alreadyExists == FALSE){
+                                csllInsertAsLast(newlist, curL->data);
+                            }
+                            
+                        }
+
+                        curK = curK -> next;
+                    }while(curK != k->first);
+
+                    curL = curL -> next;
+
+                }while(curL != l->first);
+
+                return newlist;
+
+
+            }
+            
+        }
+    }
+
+    return NULL;
+}
+
+
+void *cdllIntersectionLists(CDLList *l, CDLList *k, int(*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CDLNode *curL = l->first;
+            CDLNode *curK;
+            CDLList *newlist = cdllcreate();
+            if(newlist != NULL){
+                do{
+
+                    curK = k->first;
+
+                    do{
+
+                        if(cmp(curL->data, curK->data)){
+
+                            CDLNode *newlistCur = newlist->first;
+                            int alreadyExists = FALSE;
+                            if(newlistCur != NULL){
+                                do{ 
+                                    if(cmp(curL->data, newlistCur -> data)){
+                                        alreadyExists = TRUE;
+                                        break;
+                                    }
+
+                                    newlistCur = newlistCur -> next;
+                                    
+                                }while(newlistCur = newlist -> first);
+
+                            }
+
+                            if(alreadyExists == FALSE){
+                                cdllInsertAsLast(newlist, curL->data);
+                            }
+                            
+                        }
+
+                        curK = curK -> next;
+                    }while(curK != k->first);
+
+                    curL = curL -> next;
+
+                }while(curL != l->first);
+
+                return newlist;
+
+
+            }
+            
+        }
+    }
+
+    return NULL;
+
+}
+
+
+int sllSumList(SLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int soma = 0;
+            SLNode *cur = l->first;
+            while(cur != NULL){
+                soma += (int)cur->data;
+                cur = cur -> next;
+            }
+
+            return soma;
+        }
+    }
+
+    return 0;
+}
+
+int dllSumList(DLList *l){
+
+     if(l != NULL){
+        if(l->first != NULL){
+            int soma = 0;
+            DLNode *cur = l->first;
+            while(cur != NULL){
+                soma += (int)cur->data;
+                cur = cur -> next;
+            }
+
+            return soma;
+        }
+    }
+
+    return 0;
+
+}
+
+int csllSumList(CSLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int soma = 0;
+            CSLNode *cur = l->first;
+            do{
+                soma += (int)cur->data;
+                cur = cur -> next;
+            }while(cur != l->first);
+
+            return soma;
+        }
+    }
+
+    return 0;
+}
+
+
+int cdllSumList(CDLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int soma = 0;
+            CDLNode *cur = l->first;
+            do{
+                soma += (int)cur->data;
+                cur = cur -> next;
+            }while(cur != l->first);
+
+            return soma;
+        }
+    }
+
+    return 0;
+}
+
+
+
+int sllNumberElements(SLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int elementsNumber = 0;
+            SLNode *cur = l->first;
+            while(cur != NULL){
+                elementsNumber++;
+                cur = cur -> next;
+            }
+
+            return elementsNumber;
+        }
+    }
+
+    return 0;
+}
+
+
+int dllNumberElements(DLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int elementsNumber = 0;
+            DLNode *cur = l->first;
+            while(cur != NULL){
+                elementsNumber++;
+                cur = cur -> next;
+            }
+
+            return elementsNumber;
+        }
+    }
+
+    return 0;
+}
+
+int csllNumberElements(CSLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            CSLNode *cur = l->first;
+            int elementsNumber = 0;
+            do{
+                elementsNumber++;
+                cur = cur->next;
+            }while(cur != l->first);
+
+            return elementsNumber;
+        }
+    }
+
+    return 0;
+}
+
+int cdllNumberElements(CDLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            CDLNode *cur = l->first;
+            int elementsNumber = 0;
+            do{
+                elementsNumber++;
+                cur = cur->next;
+            }while(cur != l->first);
+
+            return elementsNumber;
+        }
+    }
+
+    return 0;
+}
+
+void *sllCreateCopyList(SLList *l){
+    if(l != NULL){
+        if(l -> first != NULL){
+            SLNode *cur = l->first;
+            SLList *copy = (SLList*)malloc(sizeof(SLList));
+            if(copy != NULL){
+                copy -> first = NULL;
+                copy -> cur = NULL;
+                while(cur != NULL){
+                    SLNode *newnode = (SLNode *)malloc(sizeof(SLNode));
+                    if(newnode != NULL){
+                        newnode -> data = cur -> data;
+                        newnode -> next = NULL;
+                        if(copy -> first != NULL){
+                            l->first = newnode;
+                            
+                        }
+                        else{
+                            SLNode *copyNode = copy->first;
+                            while(copyNode -> next != NULL){
+                                copyNode = copyNode -> next;
+                            }
+
+                            copyNode -> next = newnode;
+                        }
+                    }
+
+                    cur = cur->next;
+                   
+                }
+
+                return copy;
+            }
+
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllCreateCopyList(DLList *l){
+    if(l != NULL){
+        if(l -> first != NULL){
+            DLNode *cur = l->first;
+            DLList *copy = (DLList*)malloc(sizeof(DLList));
+            if(copy != NULL){
+                copy -> first = NULL;
+                copy -> cur = NULL;
+                while(cur != NULL){
+                    DLNode *newnode = (DLNode *)malloc(sizeof(DLNode));
+                    if(newnode != NULL){
+                        newnode -> data = cur -> data;
+                        newnode -> next = NULL;
+                        if(copy -> first == NULL){
+                            l->first = newnode;
+                            newnode -> prev = NULL;
+                            
+                        }
+                        else{
+                            DLNode *copyNode = copy->first;
+                            while(copyNode -> next != NULL){
+                                copyNode = copyNode -> next;
+                            }
+
+                            copyNode -> next = newnode;
+                            newnode -> prev = copyNode;
+                        }
+                    }
+
+                    cur = cur->next;
+                   
+                }
+
+                return copy;
+            }
+
+        }
+    }
+
+    return NULL;
+}
+
+
+void *csllCreateCopyList(CSLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            CSLList *copyList = (CSLList *)malloc(sizeof(CSLList));
+            if(copyList != NULL){
+                copyList->first = NULL;
+                copyList -> cur = NULL;
+                CSLNode *cur = l->first;
+                do{
+                    CSLNode *newnode = (CSLNode *)malloc(sizeof(CSLNode));
+                    newnode -> data = cur -> data;
+                    if(copyList -> first == NULL){
+                        copyList -> first = newnode;
+                        newnode -> next = copyList -> first;
+                    }
+                    else{
+                        CSLNode *copyNode = copyList -> first;
+                        while(copyNode->next != copyList -> first){
+                            copyNode = copyNode -> next;
+                        }
+
+                        copyNode -> next = newnode;
+                        newnode -> next = copyList -> first;
+                    }
+
+
+                    cur = cur -> next;
+                }while(cur != l->first);
+
+                return copyList;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllCreateCopyList(CDLList *l){
+    if(l != NULL){
+        if(l -> first != NULL){
+            CDLList *copyList = (CDLList *)malloc(sizeof(CDLList));
+            if(copyList != NULL){
+                copyList -> first = NULL;
+                copyList -> cur = NULL;
+                CDLNode *cur = l->first;
+                do{
+                    CDLNode *newnode = (CDLNode *)malloc(sizeof(CDLNode));
+                    if(newnode != NULL){
+                        newnode -> data = cur -> data;
+                        if(copyList -> first == NULL){
+                            copyList->first = newnode;
+                            newnode -> prev = copyList->first;
+                            newnode -> next = copyList->first;
+                        }
+                        else{
+                            CDLNode *copyNode = copyList -> first;
+                            while (copyNode -> next != copyList -> first){
+                                copyNode = copyNode -> next;
+                            }
+
+                            newnode -> next = copyNode -> next;
+                            newnode -> prev = copyNode;
+                            copyNode -> next = newnode;
+                        }
+                    }
+
+                    cur = cur -> next;
+                }while(cur != l->first);
+
+                return copyList;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+int sllVerifyEqualsLists(SLList *l, SLList *k, int(*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            SLNode *curL = l->first;
+            SLNode *curK = k->first;
+
+            while(curL != NULL && curK != NULL){
+                if(cmp(curL -> data, curK -> data) != 0){
+                    return FALSE;
+                }
+
+                curL = curL->next;
+                curK = curK->next;
+            }
+
+            if(curL == NULL && curK == NULL){
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+int dllVerifyEqualsLists(DLList *l, DLList *k, int(*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            DLNode *curL = l->first;
+            DLNode *curK = k->first;
+
+            while(curL != NULL && curK != NULL){
+                if(cmp(curL -> data, curK -> data) != 0){
+                    return FALSE;
+                }
+
+                curL = curL->next;
+                curK = curK->next;
+            }
+
+            if(curL == NULL && curK == NULL){
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+int csllVerifyEqualsLists(CSLList *l, CSLList *k, int (*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CSLNode *curL = l->first;
+            CSLNode *curK = k->first;
+
+            do{
+
+                if(cmp(curL -> data, curK -> data) != 0){
+                    return FALSE;
+                }
+
+                curL = curL -> next;
+                curK = curK -> next;
+
+            }while(curL != l->first && curK != k->first);
+
+            if(curL == NULL && curK == NULL){
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+int cdllVerifyEqualsLists(CDLList *l, CDLList *k, int (*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CDLNode *curL = l->first;
+            CDLNode *curK = k->first;
+
+            do{
+
+                if(cmp(curL -> data, curK -> data) != 0){
+                    return FALSE;
+                }
+
+                curL = curL -> next;
+                curK = curK -> next;
+
+            }while(curL != l->first && curK != k->first);
+
+            if(curL == NULL && curK == NULL){
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
+    }
+
+    return FALSE;
+}
