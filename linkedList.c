@@ -2155,3 +2155,270 @@ void *cdllInvertList(CDLList *l){
 
     return NULL;
 }
+
+void *sllCombineOrdenedLists(SLList *l, SLList *k, int(*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            SLNode *curL = l->first;
+            SLNode *curK = k->first;
+            int stat;
+            SLList *newlist = sllcreate();
+            if(newlist != NULL){
+                while(curL != NULL && curK != NULL){
+                    if(cmp(curL->data, curK->data) <= 0){
+                        sllInsertAsLast(newlist, curL->data);
+                        curL = curL -> next;
+                    }
+                    else{
+                        sllInsertAsLast(newlist, curK->data);
+                        curK = curK -> next;
+                    }
+                   
+                }
+
+                if(curL != NULL){
+                    while(curL != NULL){
+                        sllInsertAsLast(newlist, curL->data);
+                        curL = curL->next;
+                    }
+                }
+
+                else if(curK != NULL){
+                    while(curK != NULL){
+                        sllInsertAsLast(newlist, curK->data);
+                        curK = curK -> next;
+                    }
+                }
+
+                return newlist;
+
+
+            }
+
+        }
+    }
+
+    return NULL;
+}
+
+
+
+void *dllCombineOrdenedLists(DLList *l, DLList *k, int(*cmp)(void *, void *)){
+    if(l!= NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            DLNode *curL = l->first;
+            DLNode *curK = k->first;
+            DLList *newlist = dllcreate();
+            if(newlist != NULL){
+                while(curL != NULL && curK != NULL){
+                    if(cmp(curL->data, curK->data) <= 0){
+                        dllInsertAsLast(newlist, curL->data);
+                        curL = curL -> next;
+                    }
+                    else{
+                        dllInsertAsLast(newlist, curK->data);
+                        curK = curK -> data;
+                    }
+                }
+
+                if(curL != NULL){
+                    while(curL != NULL){
+                        dllInsertAsLast(newlist, curL->data);
+                        curL = curL -> next;
+                    }
+                }
+                else if(curK != NULL){
+                    dllInsertAsLast(newlist, curK -> data);
+                    curK = curK->next;
+                }
+
+                return newlist;
+
+
+            }
+            
+        }
+    }
+
+    return NULL;
+}
+
+void *csllCombinedOrdenedLists(CSLList *l, CSLList *k, int(*cmp)(void *, void*)){
+    if(l!= NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CSLNode *curL = l->first;
+            CSLNode *curK = k->first;
+            CSLList *newlist = csllcreate();
+            if(newlist != NULL){
+                do{
+
+                    if(cmp(curL->data, curK->data) <= 0){
+                        csllInsertAsLast(newlist, curL->data);
+                        curL = curL->next;
+                    }
+
+                    else{
+                        csllInsertAsLast(newlist, curK->data);
+                        curK = curK -> next;
+                    }
+
+                }while(curL != l->first && curK != k->first);
+
+                if(curL != NULL){
+                    while(curL != l->first){
+                        csllInsertAsLast(newlist, curL->data);
+                        curL = curL -> next;
+                    }
+
+                }
+
+                else if(curK != NULL){
+                    while(curK != k->first){
+                        csllInsertAsLast(newlist, curK -> data);
+                        curK = curK -> next;
+                    }
+                }
+
+                return newlist;
+                
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllCombineOrdenedLists(CDLList *l, CDLList *k, int(*cpm)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CDLNode *curL = l->first;
+            CDLNode *curK = k->first;
+
+            CDLList *newlist = cdllcreate();
+            if(newlist != NULL){
+                do{
+                    if(cmp(curL->data, curK->data) <= 0){
+                        cdllInsertAsLast(newlist, curL->data);
+                        curL = curL -> next;
+                    }
+                    else{
+                        cdllInsertAsLast(newlist, curK->data);
+                        curK = curK -> next;
+                    }
+                }while(curL != l->first && curK != k->first);
+
+                if(curL != NULL){
+                    while(curL != l->first){
+                        cdllInsertAsLast(newlist, curL->data);
+                        curL = curL -> next;
+                    }
+                }
+                else if(curK != NULL){
+                    while(curK != k->first){
+                        cdllInsertAsLast(newlist, curK->data);
+                        curK = curK -> next;
+                    }
+                }
+
+                return newlist;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *sllJoinLists(SLList *l, SLList *k){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            SLList *newlist = sllcreate();
+            if(newlist != NULL){
+                SLNode *cur = l->first;
+                while(cur != NULL){
+                    sllInsertAsLast(newlist, cur->data);
+                    cur = cur -> next;
+                }
+
+                cur = k->first;
+                while(cur != NULL){
+                    sllInsertAsLast(newlist, cur->data);
+                    cur = cur->next;
+                }
+
+                return newlist;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllJoinLists(DLList *l, DLList *k){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            DLList *newlist = dllcreate();
+            if(newlist != NULL){
+                DLNode *cur = l->first;
+                while(cur != NULL){
+                    dllInsertAsLast(newlist, cur->data);
+                    cur = cur -> next;
+                }
+
+                cur = k->first;
+                while(cur != NULL){
+                    dllInsertAsLast(newlist, cur->data);
+                    cur = cur->next;
+                }
+
+                return newlist;
+            }
+        }
+    }
+}
+
+void *csllJoinLists(CSLList *l, CSLList *k){
+     if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CSLList *newlist = csllcreate();
+            if(newlist != NULL){
+                CSLNode *cur = l->first;
+                do{
+                    csllInsertAsLast(newlist, cur->data);
+                    cur = cur -> next;
+                }while(cur != l->first);
+
+                cur = k->first;
+                do{
+                    csllInsertAsLast(newlist, cur->data);
+                    cur = cur->next;
+                }while(cur != k->first);
+
+                return newlist;
+            }
+        }
+    }
+}
+
+void *cdllJoinLists(CDLList *l, CDLList *k){
+     if(l != NULL && k != NULL){
+        if(l->first != NULL && k->first != NULL){
+            CDLList *newlist = cdllcreate();
+            if(newlist != NULL){
+                CDLNode *cur = l->first;
+                do{
+                    cdllInsertAsLast(newlist, cur->data);
+                    cur = cur -> next;
+                }while(cur != l->first);
+
+                cur = k->first;
+                do{
+                    cdllInsertAsLast(newlist, cur->data);
+                    cur = cur->next;
+                }while(cur != k->first);
+
+                return newlist;
+            }
+        }
+    }
+}

@@ -150,6 +150,16 @@ void *csllInvertList(CSLList *l);
 void *cdllInvertList(CDLList *l);
 
 
+void *sllCombineOrdenedLists(SLList *l, SLList *k, int(*cmp)(void *, void *));
+void *dllCombineOrdenedLists(DLList *l, DLList *k, int(*cmp)(void *, void *));
+void *csllCombinedOrdenedLists(CSLList *l, CSLList *k, int(*cmp)(void *, void*));
+void *cdllCombineOrdenedLists(CDLList *l, CDLList *k, int(*cpm)(void *, void *));
+
+
+void *sllJoinLists(SLList *l, SLList *k);
+void *dllJoinLists(DLList *l, DLList *k);
+void *csllJoinLists(CSLList *l, CSLList *k);
+void *cdllJoinLists(CDLList *l, CDLList *k);
 
 
 
