@@ -3042,3 +3042,270 @@ int cdllVerifyEqualsLists(CDLList *l, CDLList *k, int (*cmp)(void *, void *)){
 
     return FALSE;
 }
+
+void *sllSplitList(SLList *l, int k){
+    if(l != NULL){
+        if(l->first != NULL){
+            int i = 0;
+            SLNode *cur = l->first;
+            while(i<k && cur != NULL){
+                cur = cur -> next;
+                i++;
+            }
+
+            if(cur != NULL){
+
+                SLNode *aux = cur->next;
+                cur -> next = NULL;
+                SLList *newlist = sllcreate();
+                if(newlist != NULL){
+                    while(aux != NULL){
+                        sllInsertAsLast(newlist, aux->data);
+                        aux = aux -> next;
+                    }
+
+                    return newlist;
+                }
+
+                
+
+            }
+
+           
+        }
+    }
+
+    return NULL;
+}
+
+void *dllSplitList(DLList *l, int k){
+
+    if(l != NULL){
+        if(l->first != NULL){
+            int i = 0;
+            DLNode *cur = l->first;
+            while(i<k && cur->next != NULL){
+                cur = cur -> next;
+                i++;
+            }
+
+            if(i == k){
+                DLNode *aux = cur -> next;
+                cur -> next = NULL;
+                DLList *newlist = dllcreate();
+                if(newlist != NULL){
+                    while(aux != NULL){
+                        dllInsertAsLast(newlist, aux->data);
+                        aux = aux -> next;
+                    }
+
+                    return newlist;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+
+void *csllSplitList(CSLList *l, int k){
+    if(l != NULL){
+        if(l->first != NULL){
+            int i = 0;
+            CSLNode *cur = l->first;
+            while(i<k && cur->next != l->first){
+                cur = cur -> next;
+                i++;
+               
+            }
+
+            if(i == k){
+                CSLNode *aux = cur -> next;
+                cur -> next = l->first;
+                CSLList *newlist = csllcreate();
+                if(newlist != NULL){
+                    do{
+                        csllInsertAsLast(newlist, aux->data);
+                        aux = aux -> next;
+                    }while(aux != l->first);
+
+                    return newlist;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllSplitList(CDLList *l, int k){
+    if(l != NULL){
+        if(l->first != NULL){
+            int i = 0;
+            CDLNode *cur = l->first;
+            while(i<k && cur -> next != l->first){
+                cur = cur -> next;
+                i++;
+            }
+
+            if(i == k){
+                CDLNode *aux = cur -> next;
+                cur -> next = l->first;
+                l->first->prev = cur;
+                CDLList *newlist = csllcreate();
+                if(newlist != NULL){
+                    do{
+                        cdllInsertAsLast(newlist, aux->data);
+                        aux = aux -> next;
+                    }while(aux != l->first);
+
+                    return newlist;
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
+void *sllremoveNElements(SLList *l, int n){
+    if(l != NULL){
+        if(l -> first != NULL){
+            int i = 0;
+            SLNode *cur = l->first;
+            SLNode *next = NULL;
+            while(i <= n && cur != NULL){
+                next = cur -> next;
+                free(cur);
+                cur = next;
+                i++;
+            }
+
+            if(cur != NULL){
+                l->first = cur;
+            }
+            else{
+                l->first = NULL;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+void *dllremoveNElements(DLList *l, int n){
+    if(l != NULL){
+        if(l -> first != NULL){
+            int i = 0;
+            DLNode *cur = l->first;
+            DLNode *next = NULL;
+            while(i <= n && cur != NULL){
+                next = cur -> next;
+                free(cur);
+                cur = next;
+                i++;
+            }
+
+            if(cur != NULL){
+                l->first = cur;
+                cur -> prev = NULL;
+            }
+            else{
+                l->first = NULL;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+
+void *csllRemoveNElements(CSLList *l, int n){
+    if(l != NULL){
+        if(l -> first != NULL){
+            
+            CSLNode *cur = l->first;
+            //tenho que pegar o número de elementos da lista, por que se eu fizer direto com o
+            //while com a codicao cur != l->first, l->first já terá sido liberado
+            int numeroElementos = 0;
+            
+            while(cur -> next != l->first){
+                cur = cur -> next;
+                numeroElementos++;
+            }
+            numeroElementos++;
+            //guardo o ultimo elemento pq vai ser útil para depois faze-lo apontar para o novo primeiro
+            CSLNode *last = cur;
+
+            int i = 1;
+            cur = l->first;
+            CSLNode *next;
+            while(i <= n && i <= numeroElementos){
+                next = cur->next;
+                free(cur);
+                cur = next;
+                i++;
+            }
+
+            if(n >= numeroElementos){
+                l->first = NULL;
+            }
+            else{
+                //tenho que fazer o último apontar para o novo primeiro, para isso guardei o último
+                last -> next = cur;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllRemoveNElements(CDLList *l, int n){
+    if(l != NULL){
+        if(l -> first != NULL){
+            
+            CDLNode *cur = l->first;
+            //tenho que pegar o número de elementos da lista, por que se eu fizer direto com o
+            //while com a codicao cur != l->first, l->first já terá sido liberado
+            int numeroElementos = 0;
+            
+            while(cur -> next != l->first){
+                cur = cur -> next;
+                numeroElementos++;
+            }
+            numeroElementos++;
+            //guardo o ultimo elemento pq vai ser útil para depois faze-lo apontar para o novo primeiro
+            CDLNode *last = cur;
+
+            int i = 1;
+            cur = l->first;
+            CDLNode *next;
+            while(i <= n && i <= numeroElementos){
+                next = cur->next;
+                free(cur);
+                cur = next;
+                i++;
+            }
+
+            if(n >= numeroElementos){
+                l->first = NULL;
+            }
+            else{
+                //tenho que fazer o último apontar para o novo primeiro, para isso guardei o último
+                last -> next = cur;
+                cur -> prev = last;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}

@@ -164,3 +164,15 @@ int sllVerifyEqualsLists(SLList *l, SLList *k, int (*cmp)(void *, void *));
 int dllVerifyEqualsLists(DLList *l, DLList *k, int (*cmp)(void *, void *));
 int csllVerifyEqualsLists(CSLList *l, CSLList *k, int (*cmp)(void *, void *));
 int cdllVerifyEqualsLists(CDLList *l, CDLList *k, int (*cmp)(void *, void *));
+
+
+void *sllSplitList(SLList *l, int k);
+void *dllSplitList(DLList *l, int k);
+void *csllSplitList(CSLList *l, int k);
+void *cdllSplitList(CDLList *l, int k);
+
+
+void *sllremoveNElements(SLList *l, int n);
+void *dllRemoveNElements(DLList *l, int n);
+void *csllRemoveNElements(CSLList *l, int n);
+void *cdllRemoveNElements(CDLList *l, int n);
