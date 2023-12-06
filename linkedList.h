@@ -176,3 +176,20 @@ void *sllremoveNElements(SLList *l, int n);
 void *dllRemoveNElements(DLList *l, int n);
 void *csllRemoveNElements(CSLList *l, int n);
 void *cdllRemoveNElements(CDLList *l, int n);
+
+
+int sllDetectCycle(SLList *l);
+int dllDetectCycle(DLList *l);
+int csllDetectCycle(CSLList *l);
+int cdllDetectCycle(CDLList *l);
+
+void *sllRemoveDuplicateData(SLList *l, int(*cmp)(void *, void*));
+void *dllRemoveDuplicateData(DLList *l, int(*cmp)(void *, void*));
+void *csllRemoveDuplicateData(CSLList *l, int(*cmp)(void *, void*));
+void *cdllRemoveDuplicateData(CDLList *l, int(*cmp)(void *, void*));
+
+
+void *sllRemoveConsecutiveDuplicateData(SLList *l, int(*cmp)(void *, void *));
+void *dllRemoveConsecutiveDuplicateData(DLList *l, int(*cmp)(void *, void *));
+void *csllRemoveConsecutiveDuplicateData(CSLList *l, int(*cmp)(void *, void *));
+void *cdllRemoveConsecutiveDuplicateData(CDLList *l, int(*cmp)(void *, void *));

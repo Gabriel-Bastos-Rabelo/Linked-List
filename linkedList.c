@@ -3196,7 +3196,7 @@ void *sllremoveNElements(SLList *l, int n){
     return NULL;
 }
 
-void *dllremoveNElements(DLList *l, int n){
+void *dllRemoveNElements(DLList *l, int n){
     if(l != NULL){
         if(l -> first != NULL){
             int i = 0;
@@ -3301,6 +3301,363 @@ void *cdllRemoveNElements(CDLList *l, int n){
                 //tenho que fazer o último apontar para o novo primeiro, para isso guardei o último
                 last -> next = cur;
                 cur -> prev = last;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+int sllDetectCycle(SLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            //algoritmo da tartaruga e da lebre
+
+            SLNode *slow = l->first;
+            SLNode *fast = l-> first;
+
+            while (fast != NULL && fast -> next != NULL){
+                slow = slow -> next;
+                fast = fast -> next -> next;
+
+                if(slow == fast){
+                    return TRUE;
+                }
+            }
+
+        }
+    }
+
+    return FALSE;
+}
+
+int dllDetectCycle(DLList *l){
+     if(l != NULL){
+        if(l->first != NULL){
+            //algoritmo da tartaruga e da lebre
+
+            DLNode *slow = l->first;
+            DLNode *fast = l-> first;
+
+            while (fast != NULL && fast -> next != NULL){
+                slow = slow -> next;
+                fast = fast -> next -> next;
+
+                if(slow == fast){
+                    return TRUE;
+                }
+            }
+
+        }
+    }
+
+    return FALSE;
+}
+
+
+int csllDetectCycle(CSLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+
+            CSLNode *slow = l->first;
+            CSLNode *fast = l->first;
+
+            do{
+                slow = slow -> next;
+                fast = fast->next->next;
+                if(slow == fast){
+                    return TRUE;
+                }
+            }while(fast != l->first && fast -> next != l->first);
+        }
+    }
+
+    return FALSE;
+}
+
+int cdllDetectCycle(CDLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+
+            CDLNode *slow = l->first;
+            CDLNode *fast = l->first;
+
+            do{
+                slow = slow -> next;
+                fast = fast->next->next;
+                if(slow == fast){
+                    return TRUE;
+                }
+            }while(fast != l->first && fast -> next != l->first);
+        }
+    }
+
+    return FALSE;
+}
+
+
+void *sllRemoveDuplicateData(SLList *l, int(*cmp)(void *, void*)){
+    if(l != NULL){
+        if(l -> first != NULL){
+
+            SLNode *cur1 = l->first;
+            SLNode *dup = NULL;
+            while(cur1 != NULL){
+                SLNode *prev = cur1;
+                SLNode *cur2 = cur1->next;
+
+                while(cur2 != NULL){
+                    if(cmp(cur1->data, cur2->data) == 0){
+                        dup = cur2;
+                        prev->next = cur2->next;
+                        free(dup);
+                        cur2 = prev->next;
+
+                    }
+                    else{
+                        prev = cur2;
+                        cur2 = cur2 -> next;
+                    }
+
+                    
+                    
+                }
+
+                cur1 = cur1->next;
+            }
+
+            return l;
+        }
+
+
+    return NULL;
+    }
+
+}
+
+
+void *dllRemoveDuplicateData(DLList *l, int(*cmp)(void *, void*)){
+    if(l != NULL){
+        if(l -> first != NULL){
+
+            DLNode *cur1 = l->first;
+            DLNode *dup = NULL;
+            while(cur1 != NULL){
+                DLNode *prev = cur1;
+                DLNode *cur2 = cur1->next;
+
+                while(cur2 != NULL){
+                    if(cmp(cur1->data, cur2->data) == 0){
+                        dup = cur2;
+                        prev->next = cur2->next;
+                        free(dup);
+                        cur2 = prev->next;
+
+                    }
+                    else{
+                        prev = cur2;
+                        cur2 = cur2 -> next;
+                    }
+
+                    
+                    
+                }
+
+                cur1 = cur1->next;
+            }
+
+            return l;
+        }
+
+
+    return NULL;
+    }
+}
+
+void *csllRemoveDuplicateData(CSLList *l, int(*cmp)(void *, void*)){
+    if(l != NULL){
+        if(l -> first != NULL){
+            CSLNode *cur1 = l->first;
+            CSLNode *dup = NULL;
+
+            do{
+                CSLNode *prev = cur1;
+                CSLNode *cur2 = cur1 -> next;
+
+                if(cur2 != l->first){
+                    do{
+                        if(cmp(cur1->data, cur2->data) == 0){
+                            dup = cur2;
+                            prev -> next = cur2 -> next;
+                            free(dup);
+                            cur2 = prev->next;
+                        }
+                        else{
+                            prev = cur2;
+                            cur2 = cur2 -> next;
+                        }
+
+                    
+                    }while(cur2 != l->first);
+                }
+
+                cur1 = cur1 -> next;
+
+            }while(cur1 != l->first);
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+
+void *cdllRemoveDuplicateData(CDLList *l, int(*cmp)(void *, void*)){
+     if(l != NULL){
+        if(l -> first != NULL){
+            CDLNode *cur1 = l->first;
+            CDLNode *dup = NULL;
+
+            do{
+                CDLNode *prev = cur1;
+                CDLNode *cur2 = cur1 -> next;
+
+                if(cur2 != l->first){
+                    do{
+                        if(cmp(cur1->data, cur2->data) == 0){
+                            dup = cur2;
+                            prev -> next = cur2 -> next;
+                            cur2->next->prev = prev;
+                            free(dup);
+                            cur2 = prev->next;
+                        }
+                        else{
+                            prev = cur2;
+                            cur2 = cur2 -> next;
+                        }
+
+                    
+                    }while(cur2 != l->first);
+
+
+                }
+                
+
+                cur1 = cur1 -> next;
+
+            }while(cur1 != l->first);
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+void *sllRemoveConsecutiveDuplicateData(SLList *l, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            SLNode *prev = l->first;
+            SLNode *cur = l->first->next;
+            SLNode *dup = NULL;
+            while(cur != NULL){
+                if(cmp(prev->data, cur->data) == 0){
+                    dup = cur;
+                    prev->next = cur->next;
+                    free(dup);
+                    cur = prev->next;
+                }
+                else{
+                    prev = cur;
+                    cur = cur->next;
+                }
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllRemoveConsecutiveDuplicateData(DLList *l, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            DLNode *prev = l->first;
+            DLNode *cur = l->first->next;
+            DLNode *dup = NULL;
+            while(cur != NULL){
+                if(cmp(prev->data, cur->data) == 0){
+                    dup = cur;
+                    prev->next = cur->next;
+                    if(cur -> next != NULL){
+                        cur -> next -> prev = prev;
+                    }
+                    free(dup);
+                    cur = prev->next;
+                }
+                else{
+                    prev = cur;
+                    cur = cur->next;
+                }
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+
+void *csllRemoveConsecutiveDuplicateData(CSLList *l, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            CSLNode *prev = l->first;
+            CSLNode *cur = l->first->next;
+            CSLNode *dup = NULL;
+            while(cur != l->first){
+                if(cmp(prev->data, cur->data) == 0){
+                    dup = cur;
+                    prev->next = cur->next;
+                    free(dup);
+                    cur = prev->next;
+                }
+                else{
+                    prev = cur;
+                    cur = cur->next;
+                }
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllRemoveConsecutiveDuplicateData(CDLList *l, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            CDLNode *prev = l->first;
+            CDLNode *cur = l->first->next;
+            CDLNode *dup = NULL;
+            while(cur != l->first){
+                if(cmp(prev->data, cur->data) == 0){
+                    dup = cur;
+                    prev->next = cur->next;
+                    cur -> next -> prev = prev;
+                    free(dup);
+                    cur = prev->next;
+                }
+                else{
+                    prev = cur;
+                    cur = cur->next;
+                }
             }
 
             return l;
