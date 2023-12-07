@@ -1204,6 +1204,7 @@ void *cdllRemoveLast(CDLList *l)
             if (prev != NULL)
             {
                 prev->next = cur->next;
+                l->first->prev = prev;
             }
             else
             {
@@ -3666,3 +3667,85 @@ void *cdllRemoveConsecutiveDuplicateData(CDLList *l, int(*cmp)(void *, void *)){
 
     return NULL;
 }
+
+
+void *sllReturnKFromLast(SLList *l, int k){
+    if(l != NULL){
+        if(l -> first != NULL){
+            SLNode *cur1 = l->first;
+            SLNode *cur2 = l->first;
+
+            for(int i = 0; i < k; i++){
+                if(cur1 == NULL){
+                    return NULL;
+                }
+
+                cur1 = cur1 -> next;
+            }
+
+            while(cur1 != NULL){
+                cur1 = cur1 -> next;
+                cur2 = cur2 -> next;
+            }
+
+            return cur2;
+
+        }
+    }
+
+    return NULL;
+}
+
+void *dllReturnKFromLast(DLList *l, int k){
+    if(l != NULL){
+        if(l -> first != NULL){
+            DLNode *cur1 = l->first;
+            DLNode *cur2 = l->first;
+
+            for(int i = 0; i < k; i++){
+                if(cur1 == NULL){
+                    return NULL;
+                }
+
+                cur1 = cur1 -> next;
+            }
+
+            while(cur1 != NULL){
+                cur1 = cur1 -> next;
+                cur2 = cur2 -> next;
+            }
+
+            return cur2;
+
+        }
+    }
+
+    return NULL;
+}
+
+
+void *csllReturnKFromLast(CSLList *l, int k){
+    if(l != NULL){
+        if(l->first != NULL){
+            CSLNode *cur1 = l->first;
+            CSLNode *cur2 = l->first;
+
+            for(int i = 0; i<k; i++){
+                cur1 = cur1 -> next;
+                if(cur1 == l->first){
+                    return NULL;
+                }
+            }
+
+            do{
+                cur1 = cur1 -> next;
+                cur2 = cur2 -> next;
+            }while(cur1 != l->first);
+
+            return cur2;
+        }
+    }
+
+    return NULL;
+}
+

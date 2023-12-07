@@ -193,3 +193,9 @@ void *sllRemoveConsecutiveDuplicateData(SLList *l, int(*cmp)(void *, void *));
 void *dllRemoveConsecutiveDuplicateData(DLList *l, int(*cmp)(void *, void *));
 void *csllRemoveConsecutiveDuplicateData(CSLList *l, int(*cmp)(void *, void *));
 void *cdllRemoveConsecutiveDuplicateData(CDLList *l, int(*cmp)(void *, void *));
+
+
+void *sllReturnKFromLast(SLList *l, int k);
+void *dllReturnKFromLast(DLList *l, int k);
+void *csllReturnKFromLast(CSLList *l, int k);
+void *cdllReturnKFromLast(CDLList *l, int k);
