@@ -223,3 +223,23 @@ void *sllGetMiddleElement(SLList *l);
 void *dllGetMiddleElement(DLList *l);
 void *csllGetMiddleElement(CSLList *l);
 void *cdllGetMiddleElement(CDLList *l);
+
+
+int sllInsertInMiddle(SLList *l, void *data);
+int dllInsertInMiddle(DLList *l, void *data);
+int csllInsertInMiddle(CSLList *l, void *data);
+int cdllInsertInMiddle(CDLList *l, void *data);
+
+
+int sllListLength(SLList *l);
+int dllListLength(DLList *l);
+int csllListLength(CSLList *l);
+int cdllListLength(CDLList *l);
+
+
+int sllIsEquals(SLList *l, SLList *k, int(*cmp)(void*, void*));
+int dllIsEquals(DLList *l, DLList *k, int(*cmp)(void*, void*));
+int csllIsEquals(CSLList *l, CSLList *k, int(*cmp)(void*, void*));
+int cdllIsEquals(CDLList *l, CDLList *k, int(*cmp)(void*, void*));
+
+
