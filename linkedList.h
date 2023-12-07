@@ -199,3 +199,27 @@ void *sllReturnKFromLast(SLList *l, int k);
 void *dllReturnKFromLast(DLList *l, int k);
 void *csllReturnKFromLast(CSLList *l, int k);
 void *cdllReturnKFromLast(CDLList *l, int k);
+
+
+int sllIsPalindrome(SLList *l, int(*cmp)(void *, void *));
+int dllIsPalindrome(DLList *l, int(*cmp)(void *, void *));
+int csllIsPalindrome(CSLList *l, int(*cmp)(void *, void*));
+int cdllIsPalindrome(CDLList *l, int(*cmp)(void*, void*));
+
+
+int sllSplitListAllocatingNodes(SLList *l, SLList *firstList, SLList *secondList);
+int dllSplitListAllocatingNodes(DLList *l, DLList *firstList, SLList *secondList);
+int csllSplitListAllocatingNodes(CSLList *l, CSLList *firstList, CSLList *secondList);
+int cdllSplitListAllocatingNodes(CDLList *l, CDLList *firstList, CDLList *secondList);
+
+
+int sllSplitListNotAllocatingNodes(SLList *l, SLList *firstList, SLList *secondList);
+int dllSplitListNotAllocatingNodes(DLList *l, DLList *firstList, DLList *secondList);
+int csllSplitListNotAllocatingNodes(CSLList *l, CSLList *firstList, CSLList *secondList);
+int cdllSplitListNotAllocatingNodes(CDLList *l, CDLList *firstList, CDLList *secondList);
+
+
+void *sllGetMiddleElement(SLList *l);
+void *dllGetMiddleElement(DLList *l);
+void *csllGetMiddleElement(CSLList *l);
+void *cdllGetMiddleElement(CDLList *l);
