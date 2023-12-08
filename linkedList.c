@@ -4703,14 +4703,19 @@ void *csllReturnL2Copy(CSLList *l1, CSLList *l2){
             CSLNode *l1Cur = l1->first;
             CSLNode *l2Cur = NULL;
             do{
-                if(l2->first != NULL){
-                    l2Cur->next = l1Cur;
-                    l2Cur = l1Cur;
+                CSLNode *newnode = (CSLNode *)malloc(sizeof(CSLNode));
+                if(newnode != NULL){
+                    newnode -> data = l1Cur->data;
+                    if(l2->first != NULL){
+                        l2Cur->next = newnode;
+                        l2Cur = newnode;
+                    }
+                    else{
+                        l2->first = newnode;
+                        l2Cur = newnode;
+                    }
                 }
-                else{
-                    l2Cur = l1Cur;
-                    l2->first = l2Cur;
-                }
+                
 
                 l1Cur = l1Cur -> next;
             }while(l1Cur != l1->first);
@@ -4731,14 +4736,19 @@ void *cdllReturnL2Copy(CDLList *l1, CDLList *l2){
             CDLNode *l1Cur = l1->first;
             CDLNode *l2Cur = NULL;
             do{
-                if(l2->first != NULL){
-                    l2Cur->next = l1Cur;
-                    l2Cur->next->prev = l2Cur;
-                    l2Cur = l1Cur;
-                }
-                else{
-                    l2Cur = l1Cur;
-                    l2->first = l2Cur;
+                CDLNode *newnode = (CDLNode *)malloc(sizeof(CDLNode));
+                if(newnode != NULL){
+                    newnode -> data = l1Cur->data;
+                    if(l2->first != NULL){
+                        l2Cur -> next = newnode;
+                        newnode -> prev = l2Cur;
+                        l2Cur = newnode;
+                    }
+                    else{
+                        l2->first = newnode;
+                        l2Cur = newnode;
+                    }
+
                 }
 
                 l1Cur = l1Cur -> next;
@@ -4748,6 +4758,219 @@ void *cdllReturnL2Copy(CDLList *l1, CDLList *l2){
             l2->first->prev = l2Cur;
 
             return l2;
+        }
+    }
+
+    return NULL;
+}
+
+void *sllReturnDifference(SLList *l, SLList *l1, SLList *l2, int(*cmp)(void *, void *)){
+    if(l1 != NULL && l2 != NULL && l != NULL){
+        if(l1->first != NULL && l2->first != NULL){
+            SLNode *l1Cur = l1->first;
+            SLNode *l2Cur;
+            SLNode *lCur = NULL;
+            while(l1Cur != NULL){
+                int alreadyExistesInL2 = FALSE;
+                
+                l2Cur = l2 -> first;
+
+                while(l2Cur != NULL){
+                    if(cmp(l1Cur -> data, l2Cur->data) == 0){
+                        alreadyExistesInL2 = TRUE;
+                        break;
+                    }
+
+                    l2Cur = l2Cur -> next; 
+                }
+
+                if(alreadyExistesInL2 == FALSE){
+                    SLNode *newnode = (SLNode *)malloc(sizeof(SLNode));
+                    if(newnode != NULL){
+                        newnode -> data = l1Cur->data;
+                        if(l -> first != NULL){
+                            lCur -> next = newnode;
+                            lCur = newnode;
+                        }
+                        else{
+                            l->first = newnode;
+                            lCur = newnode;
+                        }
+                    }
+                   
+                }
+
+                l1Cur = l1Cur -> next;
+
+                
+            }
+
+            if(lCur != NULL){
+                lCur -> next = NULL;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+
+void *dllReturnDifference(DLList *l, DLList *l1, DLList *l2, int(*cmp)(void *, void *)){
+     if(l1 != NULL && l2 != NULL && l != NULL){
+        if(l1->first != NULL && l2->first != NULL){
+            DLNode *l1Cur = l1->first;
+            DLNode *l2Cur;
+            DLNode *lCur = NULL;
+            while(l1Cur != NULL){
+                int alreadyExistesInL2 = FALSE;
+                
+                l2Cur = l2 -> first;
+
+                while(l2Cur != NULL){
+                    if(cmp(l1Cur -> data, l2Cur->data) == 0){
+                        alreadyExistesInL2 = TRUE;
+                        break;
+                    }
+
+                    l2Cur = l2Cur -> next; 
+                }
+
+                if(alreadyExistesInL2 == FALSE){
+                    DLNode *newnode = (DLNode *)malloc(sizeof(DLNode));
+                    if(newnode != NULL){
+                        newnode -> data = l1Cur->data;
+                        if(l -> first != NULL){
+                            lCur -> next = newnode;
+                            newnode -> prev = lCur;
+                            lCur = newnode;
+                        }
+                        else{
+                            l->first = newnode;
+                            newnode -> prev = NULL;
+                            lCur = newnode;
+                        }
+                    }
+                   
+                }
+
+                l1Cur = l1Cur -> next;
+
+                
+            }
+
+            if(lCur != NULL){
+                lCur -> next = NULL;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+void *csllReturnDifference(CSLList *l, CSLList *l1, CSLList *l2, int(*cmp)(void *, void *)){
+    if(l1 != NULL && l2 != NULL && l != NULL){
+        if(l1->first != NULL && l2->first != NULL){
+            CSLNode *l1Cur = l1->first;
+            CSLNode *l2Cur;
+            CSLNode *lCur = NULL;
+            do{
+                int alreadyExistesInL2 = FALSE;
+                
+                l2Cur = l2 -> first;
+
+                do{
+                    if(cmp(l1Cur -> data, l2Cur->data) == 0){
+                        alreadyExistesInL2 = TRUE;
+                        break;
+                    }
+
+                    l2Cur = l2Cur -> next; 
+                }while(l2Cur != l2->first);
+
+                if(alreadyExistesInL2 == FALSE){
+                    CSLNode *newnode = (CSLNode *)malloc(sizeof(CSLNode));
+                    if(newnode != NULL){
+                        newnode -> data = l1Cur->data;
+                        if(l -> first != NULL){
+                            lCur -> next = newnode;
+                            lCur = newnode;
+                        }
+                        else{
+                            l->first = newnode;
+                            lCur = newnode;
+                        }
+                    }
+                   
+                }
+
+                l1Cur = l1Cur -> next;
+
+                
+            }while(l1Cur != l1->first);
+
+            if(lCur != NULL){
+                lCur -> next = l->first;
+            }
+
+            return l;
+        }
+    }
+
+    return NULL;
+}
+
+void *cdllReturnDifference(CDLList *l, CDLList *l1, CDLList *l2, int(*cmp)(void *, void *)){
+    if(l1 != NULL && l2 != NULL && l != NULL){
+        if(l1->first != NULL && l2->first != NULL){
+            CDLNode *l1Cur = l1->first;
+            CDLNode *l2Cur;
+            CDLNode *lCur = NULL;
+            do{
+                int alreadyExistesInL2 = FALSE;
+                
+                l2Cur = l2 -> first;
+
+                do{
+                    if(cmp(l1Cur -> data, l2Cur->data) == 0){
+                        alreadyExistesInL2 = TRUE;
+                        break;
+                    }
+
+                    l2Cur = l2Cur -> next; 
+                }while(l2Cur != l2->first);
+
+                if(alreadyExistesInL2 == FALSE){
+                    CDLNode *newnode = (CDLNode *)malloc(sizeof(CDLNode));
+                    if(newnode != NULL){
+                        newnode -> data = l1Cur->data;
+                        if(l -> first != NULL){
+                            lCur -> next = newnode;
+                            newnode -> prev = lCur;
+                            lCur = newnode;
+                        }
+                        else{
+                            l->first = newnode;
+                            lCur = newnode;
+                        }
+                    }
+                   
+                }
+
+                l1Cur = l1Cur -> next;
+
+                
+            }while(l1Cur != l1->first);
+
+            if(lCur != NULL){
+                lCur -> next = l->first;
+                l2->first->prev = lCur;
+            }
+
+            return l;
         }
     }
 

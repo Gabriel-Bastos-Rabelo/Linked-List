@@ -249,5 +249,10 @@ void *csllReturnL2Copy(CSLList *l1, CSLList *l2);
 void *cdllReturnL2Copy(CDLList *l1, CDLList *l2);
 
 
+void *sllReturnDifference(SLList *l, SLList *l1, SLList *l2, int(*cmp)(void *, void *));
+void *dllReturnDifference(DLList *l, DLList *l1, DLList *l2, int(*cmp)(void *, void *));
+void *csllReturnDifference(CSLList *l, CSLList *l1, CSLList *l2, int(*cmp)(void *, void *));
+void *cdllReturnDifference(CDLList *l, CDLList *l1, CDLList *l2, int(*cmp)(void *, void *));
+
 
 
