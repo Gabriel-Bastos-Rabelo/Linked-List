@@ -243,3 +243,11 @@ int csllIsEquals(CSLList *l, CSLList *k, int(*cmp)(void*, void*));
 int cdllIsEquals(CDLList *l, CDLList *k, int(*cmp)(void*, void*));
 
 
+void *sllReturnL2Copy(SLList *l1, SLList *l2);
+void *dllReturnL2Copy(DLList *l1, DLList *l2);
+void *csllReturnL2Copy(CSLList *l1, CSLList *l2);
+void *cdllReturnL2Copy(CDLList *l1, CDLList *l2);
+
+
+
+
