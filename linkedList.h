@@ -255,4 +255,37 @@ void *csllReturnDifference(CSLList *l, CSLList *l1, CSLList *l2, int(*cmp)(void 
 void *cdllReturnDifference(CDLList *l, CDLList *l1, CDLList *l2, int(*cmp)(void *, void *));
 
 
+int sllNumberEqualValue(SLList *l, SLList *k, int(*cmp)(void *, void *));
+int dllNumberEqualValue(DLList *l, DLList *k, int(*cmp)(void *, void *));
+int csllNumberEqualValue(CSLList *l, CSLList *k, int(*cmp)(void *, void *));
+int cdllNumberEqualValue(CDLList *l, CDLList *k, int(*cmp)(void *, void *));
 
+
+int sllRemoveEvenNodes(SLList *l);
+int dllRemoveEvenNodes(DLList *l);
+int csllRemoveEvenNodes(CSLList *l);
+int cdllRemoveEvenNodes(CDLList *l);
+
+
+int sllRemoveOddNodes(SLList *l);
+int dllRemoveOddNodes(DLList *l);
+int csllRemoveOddNodes(CSLList *l);
+int cdllRemoveOddNodes(CDLList *l);
+
+int sllSplitListInOddsAndEvens(SLList *l, SLList *l1, SLList *l2);
+int dllSplitListInOddsAndEvens(DLList *l, DLList *l1, DLList *l2);
+int csllSplitListInOddsAndEvens(CSLList *l, CSLList *l1, CSLList *l2);
+int cdllSplitListInOddsAndEvens(CDLList *l, CDLList *l1, CDLList *l2);
+
+int sllSwitchKeys(SLList *l, void *key1, void *key2, int(*cmp)(void *, void *));
+int dllSwitchKeys(DLList *l, void *key1, void *key2, int(*cmp)(void *, void *));
+int csllSwitchKeys(CSLList *l, void *key1, void *key2, int(*cmp)(void *, void *));
+int cdllSwitchKeys(CDLList *l, void *key1, void *key2, int(*cmp)(void *, void *));
+
+
+//questao 1 prova 2022.1
+int ÉInversa(CDLList *l1, CDLList *l2);
+
+
+//questão 2 prova 2022.1
+void PegaElementosIguais(DLList *l1, DLList *l2, DLList *l3);

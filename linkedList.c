@@ -4976,3 +4976,1054 @@ void *cdllReturnDifference(CDLList *l, CDLList *l1, CDLList *l2, int(*cmp)(void 
 
     return NULL;
 }
+
+int sllNumberEqualValue(SLList *l, SLList *k, int(*cmp)(void *, void *)){
+
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k -> first != NULL){
+            SLNode *lCur = l->first;
+            SLNode *kCur;
+            SLList *auxList = sllcreate();
+            SLNode *auxCur;
+            int cont = 0;
+            while(lCur!= NULL){
+                kCur = k->first;
+                while(kCur != NULL){
+                    if(cmp(lCur -> data, kCur -> data) == 0){
+                        auxCur = auxList->first;
+                        int alreadyContaded = FALSE;
+                        while(auxCur != NULL){
+                            if(cmp(kCur -> data, auxCur->data) == 0){
+                                alreadyContaded = TRUE;
+                                break;
+                            }
+
+                            auxCur = auxCur -> next;
+                        }
+
+                        if(alreadyContaded == FALSE){
+                            cont++;
+                            sllInsertAsLast(auxList, kCur -> data);
+                        }
+                        break;
+                    }
+
+                    kCur = kCur -> next;
+                }
+
+                lCur = lCur -> next;
+            }
+
+            return cont;
+        }
+    }
+
+    return 0;
+}
+
+
+int dllNumberEqualValue(DLList *l, DLList *k, int(*cmp)(void *, void *)){
+     if(l != NULL && k != NULL){
+        if(l->first != NULL && k -> first != NULL){
+            DLNode *lCur = l->first;
+            DLNode *kCur;
+            DLList *auxList = dllcreate();
+            DLNode *auxCur;
+            int cont = 0;
+            while(lCur!= NULL){
+                kCur = k->first;
+                while(kCur != NULL){
+                    if(cmp(lCur -> data, kCur -> data) == 0){
+                        auxCur = auxList->first;
+                        int alreadyContaded = FALSE;
+                        while(auxCur != NULL){
+                            if(cmp(kCur -> data, auxCur->data) == 0){
+                                alreadyContaded = TRUE;
+                                break;
+                            }
+
+                            auxCur = auxCur -> next;
+                        }
+
+                        if(alreadyContaded == FALSE){
+                            cont++;
+                            dllInsertAsLast(auxList, kCur -> data);
+                        }
+                        break;
+                    }
+
+                    kCur = kCur -> next;
+                }
+
+                lCur = lCur -> next;
+            }
+
+            return cont;
+        }
+    }
+
+    return 0;
+}
+
+int csllNumberEqualValue(CSLList *l, CSLList *k, int(*cmp)(void *, void *)){
+     if(l != NULL && k != NULL){
+        if(l->first != NULL && k -> first != NULL){
+            CSLNode *lCur = l->first;
+            CSLNode *kCur;
+            CSLList *auxList = csllcreate();
+            CSLNode *auxCur;
+            int cont = 0;
+            do{
+                kCur = k->first;
+                do{
+                    if(cmp(lCur -> data, kCur -> data) == 0){
+                        auxCur = auxList->first;
+                        int alreadyContaded = FALSE;
+                        do{
+                            if(cmp(kCur -> data, auxCur->data) == 0){
+                                alreadyContaded = TRUE;
+                                break;
+                            }
+
+                            auxCur = auxCur -> next;
+                        }while(auxCur != auxList -> first);
+
+                        if(alreadyContaded == FALSE){
+                            cont++;
+                            csllInsertAsLast(auxList, kCur -> data);
+                        }
+                        break;
+                    }
+
+                    kCur = kCur -> next;
+                }while(kCur != k->first);
+
+                lCur = lCur -> next;
+            }while(lCur!= l->first);
+
+            return cont;
+        }
+    }
+
+    return 0;
+}
+
+
+int cdllNumberEqualValue(CDLList *l, CDLList *k, int(*cmp)(void *, void *)){
+    if(l != NULL && k != NULL){
+        if(l->first != NULL && k -> first != NULL){
+            CDLNode *lCur = l->first;
+            CDLNode *kCur;
+            CDLList *auxList = cdllcreate();
+            CDLNode *auxCur;
+            int cont = 0;
+            do{
+                kCur = k->first;
+                do{
+                    if(cmp(lCur -> data, kCur -> data) == 0){
+                        auxCur = auxList->first;
+                        int alreadyContaded = FALSE;
+                        do{
+                            if(cmp(kCur -> data, auxCur->data) == 0){
+                                alreadyContaded = TRUE;
+                                break;
+                            }
+
+                            auxCur = auxCur -> next;
+                        }while(auxCur != auxList -> first);
+
+                        if(alreadyContaded == FALSE){
+                            cont++;
+                            cdllInsertAsLast(auxList, kCur -> data);
+                        }
+                        break;
+                    }
+
+                    kCur = kCur -> next;
+                }while(kCur != k->first);
+
+                lCur = lCur -> next;
+            }while(lCur!= l->first);
+
+            return cont;
+        }
+    }
+
+    return 0;
+}
+
+int sllRemoveEvenNodes(SLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isEven = FALSE;
+            SLNode *cur = l->first;
+            SLNode *prev = cur;
+            SLNode *aux;
+            while(cur != NULL){
+                if(isEven){
+                    aux = cur;
+                    prev -> next = cur -> next;
+                    free(cur);
+                    cur = aux;
+                    isEven = FALSE;
+                    
+                }
+                else{
+                    isEven = TRUE;
+                    prev = cur;
+                }
+                
+                cur = cur -> next;
+
+            }
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
+int dllRemoveEvenNodes(DLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isEven = FALSE;
+            DLNode *cur = l->first;
+            DLNode *prev = cur;
+            DLNode *aux;
+            while(cur != NULL){
+                if(isEven){
+                    DLNode *aux = cur->next;
+                    free(cur);
+                    prev->next = aux;
+                    if(aux != NULL){
+                        aux -> prev = prev;
+                    }
+                    cur = aux;
+                    isEven = FALSE;
+                    
+                }
+                else{
+                    isEven = TRUE;
+                    prev = cur;
+                    cur = cur -> next;
+                }
+                
+                
+
+            }
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+int csllRemoveEvenNodes(CSLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isEven = FALSE;
+            CSLNode *cur = l->first;
+            CSLNode *prev = cur;
+            CSLNode *aux;
+            do{
+                if(isEven){
+                    aux = cur;
+                    prev -> next = cur -> next;
+                    free(cur);
+                    cur = aux;
+                    isEven = FALSE;
+                    
+                }
+                else{
+                    isEven = TRUE;
+                    prev = cur;
+                }
+                
+                cur = cur -> next;
+
+            }while(cur != l->first);
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+int cdllRemoveEvenNodes(CDLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isEven = FALSE;
+            CDLNode *cur = l->first;
+            CDLNode *prev = cur;
+            do{
+                if(isEven){
+                    CDLNode *aux = cur->next;
+                    free(cur);
+                    prev->next = aux;
+                    aux -> prev = prev;
+                    cur = aux;
+                    isEven = FALSE;
+                    
+                }
+                else{
+                    isEven = TRUE;
+                    prev = cur;
+                    cur = cur -> next;
+                }
+                
+                
+
+            }while(cur != l->first);
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
+
+int sllRemoveOddNodes(SLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isOdd = TRUE;
+            SLNode *cur = l->first;
+            SLNode *prev = NULL;
+            while(cur != NULL){ 
+                if(isOdd){
+                    SLNode *aux = cur -> next;
+                    free(cur);
+                    if(prev == NULL){
+                        l->first = aux;
+                    }
+                    else{
+                        prev -> next = aux;
+                    }
+
+                    cur = aux;
+                    isOdd = FALSE;
+                }
+                else{
+                    prev = cur;
+                    cur = cur -> next;
+
+                    isOdd = TRUE;
+                }
+
+               
+            }
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
+int dllRemoveOddNodes(DLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isOdd = TRUE;
+            DLNode *cur = l->first;
+            DLNode *prev = NULL;
+
+            while(cur != NULL){
+                if(isOdd){
+                    DLNode *aux = cur -> next;
+                    free(cur);
+                    if(prev == NULL){
+                        l->first = aux;
+                        if(aux != NULL){
+                            aux->prev = NULL;
+                        }
+                    }
+                    else{
+                        prev->next = aux;
+
+                        if(aux != NULL){
+                            aux->prev = prev;
+                        }
+                       
+                    }
+
+                    cur = aux;
+                    isOdd = FALSE;
+                }
+                else{
+                    prev = cur;
+                    cur = cur -> next;
+                    isOdd = TRUE;
+                }
+            }
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
+int csllRemoveOddNodes(CSLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isOdd = TRUE;
+            CSLNode *cur = l->first;
+            CSLNode *prev = NULL;
+
+            do{
+                if(isOdd){
+                    CSLNode *aux = cur -> next;
+                    free(cur);
+                    if(prev == NULL){
+                        if(aux == l->first){
+                            l->first = NULL;
+                        }
+                        else{
+                            l->first = aux;
+
+                            //tenho que achar o ultimo elemento e faze-lo apontar para o proximo do primeiro
+
+                            SLNode *auxCur = l->first;
+                            while(auxCur -> next != l->first){
+                                auxCur = auxCur -> next;
+                            }
+
+                            auxCur -> next = aux;
+                        }
+                    
+                    }
+
+                    else{
+                        prev -> next = aux;
+                    }
+                    
+                    cur = aux;
+                    isOdd = FALSE;
+                }
+                else{
+
+                    prev = cur;
+                    cur = cur -> next;
+
+                    isOdd = TRUE;
+                    
+                }
+            }while(cur != l->first);
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+int cdllRemoveOddNodes(CDLList *l){
+    if(l != NULL){
+        if(l->first != NULL){
+            int isOdd = TRUE;
+            CDLNode *cur = l->first;
+            CDLNode *prev = NULL;
+            do{
+                if(isOdd){
+                    CDLNode *aux = cur -> next;
+                    if(prev == NULL){
+                        if(aux == l->first){
+                            l->first = NULL;
+                        }
+                        else{
+                            cur -> prev -> next = aux;
+                            l->first = aux;
+                        }  
+                    }
+                    else{
+                        prev -> next = aux;
+                        aux -> prev = prev;
+                    }
+
+                    free(cur);
+                    cur = aux;
+                    isOdd = FALSE;
+
+                }
+                else{
+                    prev = cur;
+                    cur = cur -> next;
+                    isOdd = TRUE;
+                }
+                
+            }while(cur != l->first);
+            
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
+int sllSplitListInOddsAndEvens(SLList *l, SLList *l1, SLList *l2){
+    if(l != NULL && l1 != NULL && l2 != NULL){
+        if(l->first != NULL){
+            SLNode *cur = l->first;
+            int inList1 = TRUE;
+            SLNode *lastl1 = NULL;
+            SLNode *lastl2 = NULL;
+            while(cur != NULL){
+                if(inList1){
+                    if(l1 -> first == NULL){
+                        l1->first = cur;
+                        lastl1 = cur;
+                    }
+                    else{
+                        lastl1 -> next = cur;
+                        lastl1 = cur;
+                    }
+                    inList1 = FALSE;
+                }
+                else{
+                    if(l2->first == NULL){
+                        l2->first = cur;
+                        lastl2 = cur;
+                    }
+                    else{
+                        lastl2->next = cur;
+                        lastl2 = cur;
+                    }
+
+                    inList1 = FALSE;
+                }
+                
+
+                cur = cur -> next;
+            }
+
+            lastl1->next = NULL;
+            lastl2->next = NULL;
+
+            l->first = NULL;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+int dllSplitListInOddsAndEvens(DLList *l, DLList *l1, DLList *l2){
+    if(l != NULL && l1 != NULL && l2 != NULL){
+        if(l -> first != NULL){
+            DLNode *cur = l->first;
+            int inList1 = TRUE;
+            DLNode *prevl1 = NULL;
+            DLNode *prevl2 = NULL;
+            while(cur != NULL){
+                if(inList1){
+                    if(l1->first == NULL){
+                        l1->first = cur;
+                        l1->first->prev = NULL;
+                        prevl1 = cur;
+                    }
+                    else{
+                        prevl1 -> next = cur;
+                        cur -> prev = prevl1;
+                        prevl1 = cur;
+                    }
+
+                    inList1 = FALSE;
+                }
+                else{
+                    if(l2->first == NULL){
+                        l2->first = cur;
+                        l2->first->prev = NULL;
+                        prevl2 = cur;
+                    }
+                    else{
+                        prevl2 -> next = cur;
+                        cur -> prev = prevl2;
+                        prevl2 = cur;
+                    }
+
+                    inList1 = TRUE;
+                }
+            }
+
+            prevl1->next = NULL;
+            prevl2->next = NULL;
+            l->first = NULL;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+int csllSplitListInOddsAndEvens(CSLList *l, CSLList *l1, CSLList *l2){
+    if(l != NULL && l1 != NULL && l2 != NULL){
+        if(l -> first != NULL){
+            CSLNode *cur = l->first;
+            int inList1 = TRUE;
+            CSLNode *prevl1 = NULL;
+            CSLNode *prevl2 = NULL;
+
+            do{
+                if(inList1){
+                    if(l1 -> first == NULL){
+                        l1->first = cur;
+                        prevl1 = cur;
+
+                    }
+                    else{
+                        prevl1->next = cur;
+                        prevl1 = cur;
+                    }
+
+                    inList1 = FALSE;
+                }
+                else{   
+                    if(l2 -> first == NULL){
+                        l2->first = cur;
+                        prevl2 = cur;
+                    }
+                    else{
+                        prevl2->next = cur;
+                        prevl2 = cur;
+                    }
+
+                    inList1 = TRUE;
+                }
+
+                cur = cur -> next;
+            }while(cur != l->first);
+
+            prevl1->next = l1->first;
+            prevl2->next = l2->first;
+            l->first = NULL;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+int cdllSplitListInOddsAndEvens(CDLList *l, CDLList *l1, CDLList *l2){
+    if(l != NULL && l1 != NULL && l2 != NULL){
+        if(l -> first != NULL){
+            CDLNode *cur = l->first;
+            int inList1 = TRUE;
+            CDLNode *prevl1 = NULL;
+            CDLNode *prevl2 = NULL;
+            do{
+                if(inList1){
+                    if(l1->first == NULL){
+                        l1->first = cur;
+                        prevl1 = cur;
+                    }
+                    else{
+                        prevl1->next = cur;
+                        cur -> prev = prevl1;
+                        prevl1 = cur;
+                    }
+
+                    inList1 = FALSE;
+                }
+                else{
+                    if(l2 -> first == NULL){
+                        l2->first = cur;
+                        prevl2 = cur;
+                    }
+                    else{
+                        prevl2->next = cur;
+                        cur -> prev = prevl2;
+                        prevl2 = cur;
+                    }
+
+                    inList1 = TRUE;
+                }
+
+                cur = cur -> next;
+
+            }while(cur != l->first);
+
+            if(prevl1 != NULL){
+                prevl1 -> next = l1 -> first;
+                l1->first->prev = prevl1;
+            }
+
+            if(prevl2 != NULL){
+                prevl2 -> next = l2 -> first;
+                l2->first->prev = prevl2;
+            }
+
+            l->first = NULL;
+
+            return TRUE;
+
+        }
+    }
+
+    return FALSE;
+}
+
+int sllSwitchKeys(SLList *l, void *key1, void *key2, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            if(cmp(key1, key2) != 0){
+                SLNode *curKey1 = l->first;
+                SLNode *prevKey1 = NULL;
+                while(curKey1 != NULL){
+                    if(cmp(curKey1->data, key1) == 0){
+                        break;
+                    }
+                    prevKey1 = curKey1;
+                    curKey1 = curKey1 -> next;
+                }
+
+                SLNode *curKey2 = l->first;
+                SLNode *prevKey2 = NULL;
+                while(curKey2 != NULL){
+                    if(cmp(curKey2->data, key2) == 0){
+                        break;
+                    }
+
+                    prevKey2 = curKey2;
+                    curKey2 = curKey2 -> next;
+                }
+
+                if(curKey1 != NULL && curKey2 != NULL){
+
+                    if(prevKey1 != NULL){
+                        prevKey1->next = curKey2;
+                    }
+                    else{
+                        l->first = curKey2;
+                    }
+
+                    if(prevKey2 != NULL){
+                        prevKey2 -> next = curKey1;
+                    }
+                    else{
+                        l->first = curKey1;
+                    }
+
+                    SLNode *temp = curKey1->next;
+                    curKey1->next = curKey2->next;
+                    curKey2->next = temp;
+
+                    return TRUE;
+                }
+
+
+            }   
+            
+        }
+    }
+
+    return FALSE;
+}
+
+int dllSwitchKeys(DLList *l, void *key1, void *key2, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            if(cmp(key1, key2) != 0){
+               
+                DLNode *curKey1 = l->first;
+                while(curKey1 != NULL){
+                    if(cmp(curKey1->data, key1) == 0){
+                        break;
+                    }
+                    curKey1 = curKey1 -> next;
+                }
+
+                DLNode *curKey2 = l->first;
+
+                while(curKey2 != NULL){
+                    if(cmp(curKey2->data, key2) == 0){
+                        break;
+                    }
+                    curKey2 = curKey2->next;
+                }
+
+                if(curKey1 != NULL && curKey2 != NULL){
+
+                    if(curKey1 == l->first){
+                        l->first = curKey2;
+                    }
+                    else if(curKey2 == l->first){
+                        l->first = curKey1;
+                    }
+
+                    DLNode *temp = curKey1->next;
+                    curKey1->next = curKey2->next;
+                    curKey2->next = temp;
+
+                    if(curKey2->next != NULL){
+                        curKey2->next->prev = curKey2;
+                    }
+
+                    if(curKey1->next != NULL){
+                        curKey1->next->prev = curKey1;
+                    }
+
+                    temp = curKey1->prev;
+                    curKey1->prev = curKey2->prev;
+                    curKey2->prev = temp;
+
+                    if(curKey1->prev != NULL){
+                        curKey1->prev->next = curKey1;
+                    }
+
+                    if(curKey2->prev != NULL){
+                        curKey2->prev->next = curKey2;
+                    }
+
+                    return TRUE;
+
+
+                }
+
+
+            }   
+            
+        }
+    }
+
+    return FALSE;
+}
+
+int csllSwitchKeys(CSLList *l, void *key1, void *key2, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            if(cmp(key1, key2) != 0){
+                CSLNode *curKey1 = l->first;
+                CSLNode *prevKey1 = NULL;
+                do{
+                    if(cmp(curKey1->data, key1) == 0){
+                        break;
+                    }
+                    prevKey1 = curKey1;
+                    curKey1 = curKey1 -> next;
+                } while(curKey1 != l->first);
+
+                CSLNode *curKey2 = l->first;
+                CSLNode *prevKey2 = NULL;
+                do{
+                    if(cmp(curKey2->data, key2) == 0){
+                        break;
+                    }
+
+                    prevKey2 = curKey2;
+                    curKey2 = curKey2 -> next;
+                }while(curKey2 != l->first);
+
+                if(curKey1 != NULL && curKey2 != NULL){
+
+                    if(curKey1->next == curKey2){
+                        curKey1->next = curKey2->next;
+                        curKey2->next = curKey1;
+
+                        if(prevKey1 != NULL){
+                            prevKey1 -> next = curKey2;
+                        }
+                    }
+
+                    else if(curKey2 -> next == curKey1){
+                        curKey2->next = curKey1->next;
+                        curKey1->next = curKey2;
+                        if(prevKey2 != NULL){
+                            prevKey2->next = curKey1;
+                        }
+
+                    }
+
+
+                    else{
+
+                        if(prevKey2 != NULL){
+                            prevKey2 -> next = curKey1;
+                        }
+                        
+
+                        if(prevKey1 != NULL){
+                            prevKey1->next = curKey2;
+                        }
+
+                        CSLNode *temp = curKey1->next;
+                        curKey1->next = curKey2->next;
+                        curKey2->next = temp;
+
+
+
+
+
+                    }
+                    
+
+                    if(prevKey1 == NULL){
+                        l->first = curKey2;
+                    }
+
+                    if(prevKey2 == NULL){
+                        l->first = curKey1;
+                    }
+
+                    return TRUE;
+                }
+
+
+            }   
+            
+        }
+    }
+
+    return FALSE;
+}
+
+
+
+
+int cdllSwitchKeys(CDLList *l, void *key1, void *key2, int(*cmp)(void *, void *)){
+    if(l != NULL){
+        if(l->first != NULL){
+            if(cmp(key1, key2) != 0){
+               
+                CDLNode *curKey1 = l->first;
+                do{
+                    if(cmp(curKey1->data, key1) == 0){
+                        break;
+                    }
+                    curKey1 = curKey1 -> next;
+                }while(curKey1 != l->first);
+
+                CDLNode *curKey2 = l->first;
+
+                do{
+                    if(cmp(curKey2->data, key2) == 0){
+                        break;
+                    }
+                    curKey2 = curKey2->next;
+                }while(curKey2 != l->first);
+
+                if(curKey1 != NULL && curKey2 != NULL){
+
+                    CDLNode *temp = curKey1->next;
+                    curKey1->next = curKey2->next;
+                    curKey2->next = temp;
+
+                    curKey1->next->prev = curKey1;
+                    curKey2->next->prev = curKey2;
+
+                    temp = curKey1->prev;
+                    curKey1->prev = curKey2->prev;
+                    curKey2->prev = temp;
+
+                    curKey1->prev->next = curKey1;
+                    curKey2->prev->next = curKey2;
+
+                   
+                    if (curKey1 == l->first) {
+                        l->first = curKey2;
+                    } 
+                    else if (curKey2 == l->first) {
+                        l->first = curKey1;
+                    }
+
+                    return TRUE;
+
+
+                }
+
+
+            }   
+            
+        }
+    }
+
+    return FALSE;
+}
+
+
+//questão 1 prova 2022.1
+
+int ÉInversa(CDLList *l1, CDLList *l2){
+    if(l1 != NULL && l2 != NULL){
+        if(l1->first != NULL && l2->first != NULL){
+
+            //primeiro vou achar o último elemento de l2
+
+            CDLNode *lastl2 = l2->first;
+            while(lastl2 -> next != l2->first){
+                lastl2 = lastl2 -> next;
+            }
+
+            //agora devo comparar o primeiro de l1 com o ultimo de l2, segundo de l1 com penultimo de l2 e assim por diante
+            
+            CDLNode *curl1 = l1->first;
+            CDLNode *curl2 = lastl2;
+            do{
+                if(curl1 -> data != curl2->data){
+                    return -1;
+                }
+
+                curl1 = curl1 -> next;
+                curl2 = curl2 -> prev;
+
+            }while(curl1 != l1->first && curl2 != lastl2);
+
+            if(curl1 == l1->first && curl2 == lastl2){
+                return 1;
+            }
+
+            else if(curl1 == l1->first && curl2 != lastl2){
+                return -1;
+            }
+
+            else{
+                return 0;
+            }
+        }
+    }
+}
+
+
+//questao 2 da prova 2022.1
+void PegaElementosIguais(DLList *l1, DLList *l2, DLList *l3){
+    if(l1 != NULL && l2 != NULL && l3 != NULL){
+        if(l1->first != NULL && l2->first != NULL){
+
+            DLNode *curl1 = l1->first;
+            DLNode *lastl3 = NULL;
+            while(curl1 != NULL){
+                DLNode *curl2 = l2->first;
+                while(curl2 != NULL){
+                    if(curl1->data == curl2->data){
+                        if(l3 -> first != NULL){
+                            lastl3->next = curl1;
+                            curl1 -> prev = lastl3;
+                            lastl3 = curl1;
+                        }
+                        else{
+                            l3->first = curl1;
+                            curl1->prev = NULL;
+                            lastl3 = curl1;
+                        }
+                    }
+
+                    curl2 = curl2 -> next;
+                }
+
+                curl1 = curl1 -> next;
+            }
+
+            if(lastl3 != NULL){
+                lastl3->next = NULL;
+            }
+            
+        }
+    }
+}
