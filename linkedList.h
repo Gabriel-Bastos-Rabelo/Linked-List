@@ -289,3 +289,15 @@ int ÉInversa(CDLList *l1, CDLList *l2);
 
 //questão 2 prova 2022.1
 void PegaElementosIguais(DLList *l1, DLList *l2, DLList *l3);
+
+//questão 1 prova 2017.1
+SLList *sllCumulativeSum(SLList *l1, int(*getValue)(void *));
+
+
+int removeOCaraEOsVizinhos(CDLList *l, void *key, int(*cmp)(void *, void*));
+
+void *sllInverter(SLList *l);
+
+void *dllInverter(DLList *l);
+
+void *intercalarDuasListas(CSLList *l1, CSLList *l2);
